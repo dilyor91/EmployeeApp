@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee list</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body style="margin-top: 50px">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin-bottom: 20px">
+                <a href="/employee/create" class="btn btn-info">Add employee</a>
+            </div>
+            <div style="margin-top: 20px">
+                <form action="/employee/search" method="post">
+                   <div class="form-group">
+                       <label for="nomi" class="control-label">Familiya</label>
+                       <input type="text" name="nomi" class="form-control" id="nomi">
+                   </div>
+
+                    <div class="form-group">
+                        <label for="department_id" class="control-label">Departmentni tanlang:</label>
+                        <select name="department" class="form-control" id="department_id">
+                            <option value="">--</option>
+                            <option th:each="department : ${departments}" th:value="${department.id}"
+                                    th:text="${department.name}" >
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-info" value="Qidirish">
+                    </div>
+                </form>
+            </div>
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <td></td>
+                    <td>#</td>
+                    <td>Familya</td>
+                    <td>Ism</td>
+                    <td>Department nomi</td>
+                    <td></td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="employee: ${employees}">
+                    <td><input type="checkbox" class="checkbox" th:value="${employee.id}"></td>
+                    <td th:text="${employee.id}" />
+                    <td th:text="${employee.lastname}" />
+                    <td th:text="${employee.firstname}" />
+                    <td th:text="${employee.department.name}" />
+                    <td>
+                        <a th:href="@{'/employee/edit/' + ${employee.id}}" class="btn btn-info">O'zgartirish</a>
+                        <a th:href="@{'/employee/delete/' + ${employee.id}}" class="btn btn-danger">O'chirish</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <div style="margin-top: 20px">
+                <button type="submit" class="btn btn-info">Barchasini o'chirish</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

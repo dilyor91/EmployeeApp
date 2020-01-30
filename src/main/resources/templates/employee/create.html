@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee add</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>New Employee Add</h2>
+    <form action="/employee/create2" method="post">
+        <div class="form-group">
+            <label for="lastname">Familiya:</label>
+            <input type="text" class="form-control" id="lastname"  name="lastname">
+        </div>
+        <div class="form-group">
+            <label for="firstname">Ism:</label>
+            <input type="text" class="form-control" id="firstname"  name="firstname">
+        </div>
+        <div class="form-group">
+            <label for="department_id" class="control-label">Departmentni tanlang:</label>
+            <select name="department" class="form-control" id="department_id">
+                <option value="">--</option>
+                <option th:each="department : ${departments}" th:value="${department.id}"
+                        th:text="${department.name}" >
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-default">Qo'shish</button>
+    </form>
+</div>
+
+</body>
+</html>
